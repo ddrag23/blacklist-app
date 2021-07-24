@@ -1,22 +1,56 @@
 <template>
   <div
-    class="offcanvas offcanvas-start"
+    class="offcanvas offcanvas-start sub-bg-primary"
     tabindex="-1"
     id="offcanvasExample"
     aria-labelledby="offcanvasLabel"
   >
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasLabel">Offcanvas</h5>
-      <button
-        type="button"
-        class="btn-close text-reset"
-        data-bs-dismiss="offcanvas"
-        aria-label="Close"
-      ></button>
-    </div>
+    <button
+      type="button"
+      class="btn-close text-reset"
+      data-bs-dismiss="offcanvas"
+      ref="offCanvasClose"
+      aria-label="Close"
+      style="display: none"
+    ></button>
     <div class="offcanvas-body">
-      Content for the offcanvas goes here. You can place just about any
-      Bootstrap component or custom elements here.
+      <nav class="navbar-dark">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <Link href="blacklist" class="nav-link px-2 text-white l">
+              <i class="bi bi-person-lines-fill"></i>
+              Blacklist
+            </Link>
+          </li>
+          <li class="nav-item">
+            <Link href="user" class="nav-link px-2 l text-white">
+              <i class="bi bi-person"></i>
+              Daftar Pengguna
+            </Link>
+          </li>
+        </ul>
+      </nav>
     </div>
   </div>
 </template>
+<script>
+import { Link } from "@inertiajs/inertia-vue3";
+import { onMounted, ref } from "vue";
+export default {
+  components: {
+    Link,
+  },
+  setup: () => {
+    const offCanvasClose = ref();
+    onMounted(() => {
+      const a = document.querySelectorAll(".l");
+      a.forEach((item) => {
+        item.addEventListener("click", () => offCanvasClose.value.click());
+      });
+    });
+    return {
+      offCanvasClose,
+    };
+  },
+};
+</script>

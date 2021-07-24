@@ -1,5 +1,12 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav
+    class="
+      navbar navbar-expand-lg navbar-dark
+      my-bg-primary
+      bd-bottom
+      fixed-top
+    "
+  >
     <div class="container-fluid">
       <button
         class="navbar-toggler me-2"
@@ -10,16 +17,24 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand me-auto">Tabungan Kita</a>
+      <a class="navbar-brand me-auto">Blacklist App</a>
       <div class="dropwdown">
         <a
           href="#"
           role="button"
+          class="profile__setting"
           id="dropdownMenuLink"
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          <i class="bi bi-person"></i>
+          <img
+            src="assets/images/person1.png"
+            class="mx-2"
+            width="40"
+            height="40"
+            alt=""
+          />
+          Aku
         </a>
         <ul
           class="dropdown-menu dropdown-menu-end"

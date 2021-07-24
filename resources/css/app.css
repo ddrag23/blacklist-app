@@ -2,6 +2,8 @@
 :root {
   --offcanva-width: 260px;
   --topNavHeight: 56px;
+  --my-primary: #0016bd;
+  --sub-color-primary: #0720e3;
 }
 .offcanvas-start {
   width: var(--offcanva-width) !important;
@@ -13,11 +15,34 @@
   color: black;
   font-size: 1rem;
 }
+.my-bg-primary {
+  background-color: var(--my-primary);
+}
+.sub-bg-primary {
+  background-color: var(--sub-color-primary) !important;
+}
+.l:hover {
+  background-color: blue;
+  border-radius: 10px;
+  box-shadow: 0 0 3px #1a279c;
+}
+.profile__setting {
+  text-decoration: unset;
+  color: white;
+  text-transform: capitalize;
+}
+.profile__setting:hover {
+  text-decoration: unset;
+  color: white;
+  text-transform: capitalize;
+}
+.active {
+  background-color: blue;
+  border-radius: 10px;
+  box-shadow: 0 0 3px #1a279c;
+}
 
 @media (min-width: 992px) {
-  body {
-    overflow: auto !important;
-  }
   .offcanvas-backdrop::before {
     display: none;
   }
