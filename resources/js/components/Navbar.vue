@@ -28,13 +28,13 @@
           aria-expanded="false"
         >
           <img
-            src="assets/images/person1.png"
+            :src="`${$page.props.static}assets/images/person1.png`"
             class="mx-2"
             width="40"
             height="40"
             alt=""
           />
-          Aku
+          {{ $page.props.user.name }}
         </a>
         <ul
           class="dropdown-menu dropdown-menu-end"
@@ -42,7 +42,7 @@
         >
           <li><a class="dropdown-item" href="#">Action</a></li>
           <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
+          <li><Link class="dropdown-item" href="logout">Logout </Link></li>
         </ul>
       </div>
     </div>
@@ -51,9 +51,11 @@
 </template>
 <script>
 import Sidebar from "@/components/Sidebar.vue";
+import { Link } from "@inertiajs/inertia-vue3";
 export default {
   components: {
     Sidebar,
+    Link,
   },
 };
 </script>

@@ -15,6 +15,14 @@ class CreateBlackListsTable extends Migration
     {
         Schema::create('black_lists', function (Blueprint $table) {
             $table->id();
+            $table->string('user_id')->nullable();
+            $table->string('foto')->nullable();
+            $table->string('foto_ktp')->nullable();
+            $table->string('nama');
+            $table->string('nohp');
+            $table->string('alamat');
+            $table->enum('jenis_kelamin', ['L', 'P']);
+            $table->string('keterangan');
             $table->timestamps();
         });
     }

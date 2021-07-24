@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\BlackListController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -18,5 +20,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/blacklist', [BlackListController::class, 'index']);
-Route::get('/user', [UserController::class, 'index']);
+Route::get('login', [LoginController::class, 'index'])->name('login');
+Route::post('/login/authentication', [
+    LoginController::class,
+    'authentication',
+]);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/logout', LogoutController::class);
+    Route::prefix('blacklist')->group(function () {
+        Route::get('/', [BlackListController::class, 'index']);
+        Route::get('/create', [BlackListController::class, 'create']);
+    });
+    Route::get('/user', [UserController::class, 'index']);
+});

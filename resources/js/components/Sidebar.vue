@@ -17,13 +17,21 @@
       <nav class="navbar-dark">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <Link href="blacklist" class="nav-link px-2 text-white l">
+            <Link
+              href="blacklist"
+              class="nav-link px-2 text-white l"
+              :class="{ active: isActive('blacklist') }"
+            >
               <i class="bi bi-person-lines-fill"></i>
               Blacklist
             </Link>
           </li>
           <li class="nav-item">
-            <Link href="user" class="nav-link px-2 l text-white">
+            <Link
+              href="user"
+              class="nav-link px-2 l text-white"
+              :class="{ active: isActive('user') }"
+            >
               <i class="bi bi-person"></i>
               Daftar Pengguna
             </Link>
@@ -40,8 +48,12 @@ export default {
   components: {
     Link,
   },
+
   setup: () => {
     const offCanvasClose = ref();
+    const currentUrl = window.location.href;
+    const uriSegment = currentUrl.split("/");
+    const isActive = (url) => uriSegment[4] === url;
     onMounted(() => {
       const a = document.querySelectorAll(".l");
       a.forEach((item) => {
@@ -50,6 +62,7 @@ export default {
     });
     return {
       offCanvasClose,
+      isActive,
     };
   },
 };

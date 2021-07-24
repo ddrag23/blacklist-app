@@ -15,7 +15,9 @@ class BlackListController extends Controller
      */
     public function index()
     {
-        return Inertia::render('blacklist/Index');
+        return Inertia::render('blacklist/Index', [
+            'blacklist' => BlackList::latest('id')->get(),
+        ]);
     }
 
     /**
@@ -25,7 +27,7 @@ class BlackListController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('blacklist/Create');
     }
 
     /**

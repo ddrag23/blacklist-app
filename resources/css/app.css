@@ -37,7 +37,7 @@
   text-transform: capitalize;
 }
 .active {
-  background-color: blue;
+  background-color: #192ebf;
   border-radius: 10px;
   box-shadow: 0 0 3px #1a279c;
 }
