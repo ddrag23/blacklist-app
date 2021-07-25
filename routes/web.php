@@ -30,6 +30,13 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('blacklist')->group(function () {
         Route::get('/', [BlackListController::class, 'index']);
         Route::get('/create', [BlackListController::class, 'create']);
+        Route::get('/edit/{blackList}', [BlackListController::class, 'edit']);
+        Route::post('/store', [BlackListController::class, 'store']);
+
+        Route::delete('/delete/{blackList}', [
+            BlackListController::class,
+            'destroy',
+        ]);
     });
     Route::get('/user', [UserController::class, 'index']);
 });

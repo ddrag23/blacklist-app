@@ -2,7 +2,7 @@
   <div class="wrapper" id="wrapper" ref="wraptable"></div>
 </template>
 <script>
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import { Grid } from "gridjs";
 
 export default {
@@ -12,20 +12,25 @@ export default {
   },
   setup: (props) => {
     const wraptable = ref();
-    const loadTable = (el) => {
+    const loadTable = () => {
       new Grid({
+        style: {
+          table: {
+            width: "100%",
+          },
+        },
         resizable: true,
         search: true,
         pagination: true,
         columns: props.columns,
         data: props.data,
       })
-        .render(el)
+        .render(wraptable.value)
         .forceRender();
     };
-    onMounted(() => loadTable(wraptable.value));
     return {
       wraptable,
+      loadTable,
     };
   },
 };

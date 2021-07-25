@@ -18,7 +18,7 @@
         <ul class="navbar-nav">
           <li class="nav-item">
             <Link
-              href="blacklist"
+              :href="`${$page.props.url}/blacklist`"
               class="nav-link px-2 text-white l"
               :class="{ active: isActive('blacklist') }"
             >
@@ -28,7 +28,7 @@
           </li>
           <li class="nav-item">
             <Link
-              href="user"
+              :href="`${$page.props.url}/user`"
               class="nav-link px-2 l text-white"
               :class="{ active: isActive('user') }"
             >

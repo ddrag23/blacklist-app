@@ -42,6 +42,7 @@ class HandleInertiaRequests extends Middleware
             ],
             'user' => fn() => $request->user(),
             'static' => asset(''),
+            'url' => url('')
         ]);
     }
 }

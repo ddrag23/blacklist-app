@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class BlackList extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'foto',
+        'foto_ktp',
+        'nama',
+        'nohp',
+        'alamat',
+        'jenis_kelamin',
+        'keterangan',
+    ];
 }

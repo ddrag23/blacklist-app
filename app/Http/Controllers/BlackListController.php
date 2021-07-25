@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BlackList;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class BlackListController extends Controller
@@ -27,7 +28,9 @@ class BlackListController extends Controller
      */
     public function create()
     {
-        return Inertia::render('blacklist/Create');
+        return Inertia::render('blacklist/Create', [
+            'title' => 'Tambah data',
+        ]);
     }
 
     /**
@@ -38,7 +41,19 @@ class BlackListController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'foto' => 'mimes:jpg,jpeg,png',
+            'foto_ktp' => 'mimes:jpg,jpeg,png',
+            'nama' => 'required',
+            'nohp' => 'required',
+            'jenis_kelamin' => 'required',
+            'alamat' => 'required',
+            'keterangan' => 'required',
+        ]);
+        $body = $request->all();
+        $body['user_id'] = auth()->user()->id;
+        BlackList::updateOrCreate(['id' => $body['id']], $body);
+        return back()->with('message', 'Data berhasil disimpan');
     }
 
     /**
@@ -60,7 +75,10 @@ class BlackListController extends Controller
      */
     public function edit(BlackList $blackList)
     {
-        //
+        return Inertia::render('blacklist/Create', [
+            'row' => $blackList,
+            'title' => 'Edit data',
+        ]);
     }
 
     /**
@@ -83,6 +101,8 @@ class BlackListController extends Controller
      */
     public function destroy(BlackList $blackList)
     {
-        //
+        Storage::delete([$blackList->foto, $blackList->foto_ktp]);
+        $blackList->delete();
+        return back()->with('message', 'Data berhasil dihapus');
     }
 }

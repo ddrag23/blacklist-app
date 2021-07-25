@@ -7,6 +7,7 @@ import { InertiaProgress } from '@inertiajs/progress'
 
 InertiaProgress.init()
 createInertiaApp({
+  title: (title) => `${title} - Blacklist-App`,
   resolve: (name) => require(`./pages/${name}`),
   setup({ el, app, props, plugin }) {
     createApp({ render: () => h(app, props) })
