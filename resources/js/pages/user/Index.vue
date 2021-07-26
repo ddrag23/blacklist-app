@@ -53,19 +53,19 @@ export default {
           const elements = [
             addButton(
               "button",
-              "btn btn-primary me-1",
+              "btn btn-primary mx-1 my-1",
               html('<i class="bi bi-pencil-square"></i>'),
               handleEdit
             ),
             addButton(
               "button",
-              "btn btn-warning me-1",
+              "btn btn-warning mx-1 my-1",
               html('<i class="bi bi-eye"></i>'),
               handleDetail
             ),
             addButton(
               "button",
-              "btn btn-danger me-1",
+              "btn btn-danger mx-1 my-1",
               html('<i class="bi bi-trash"></i>'),
               handleDelete
             ),

@@ -58,7 +58,7 @@ class UserController extends Controller
         $user = new User();
         $body = $request->all();
         $body['password'] = !empty($request->password)
-            ? Hash::make($request->passowrd)
+            ? Hash::make($request->password)
             : $user->find($request->id)->password;
         $user->updateOrCreate(['id' => $body['id']], $body);
         return back()->with('message', 'Data berhasil disimpan');

@@ -40,9 +40,23 @@
           class="dropdown-menu dropdown-menu-end"
           aria-labelledby="dropdownMenuLink"
         >
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><Link class="dropdown-item" href="logout">Logout </Link></li>
+          <li>
+            <Link class="dropdown-item" href="profile">
+              <i class="bi bi-person-circle"></i> Profile</Link
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">
+              <i class="bi bi-shield-lock-fill"></i>
+              Change Password</a
+            >
+          </li>
+          <li>
+            <Link class="dropdown-item" href="logout">
+              <i class="bi bi-box-arrow-in-left"></i>
+              Logout
+            </Link>
+          </li>
         </ul>
       </div>
     </div>

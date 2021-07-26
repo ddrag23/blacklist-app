@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\BlackListController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -46,5 +47,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/detail/{user}', [UserController::class, 'show']);
         Route::post('/store', [UserController::class, 'store']);
         Route::delete('/delete/{user}', [UserController::class, 'destroy']);
+    });
+
+    Route::prefix('profile')->group(function () {
+        Route::get('/', [ProfileController::class, 'index']);
+        Route::post('/store', [ProfileController::class, 'store']);
     });
 });

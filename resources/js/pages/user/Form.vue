@@ -115,8 +115,8 @@
                     :class="{ 'is-invalid': form.errors.is_active }"
                   >
                     <option value="" selected disabled>-Pilih-</option>
-                    <option value="L">Laki-Laki</option>
-                    <option value="P">Perempuan</option>
+                    <option value="0">Non-aktif</option>
+                    <option value="1">Aktif</option>
                   </select>
                   <div v-if="form.errors.is_active" class="invalid-feedback">
                     {{ form.errors.is_active }}
@@ -140,7 +140,7 @@
                     >Password Confirmation</label
                   >
                   <input
-                    type="text"
+                    type="password"
                     id="password_confirmation"
                     class="form-control"
                     v-model="form.password_confirmation"

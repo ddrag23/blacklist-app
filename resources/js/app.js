@@ -1,5 +1,5 @@
 import { createApp, h, computed } from 'vue'
-import { createInertiaApp } from '@inertiajs/inertia-vue3'
+import { createInertiaApp, Head } from '@inertiajs/inertia-vue3'
 import Layout from '@/pages/Layout.vue'
 import GridTable from '@/components/GridTable.vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -18,6 +18,7 @@ createInertiaApp({
     const flashMessage = computed(() => props.initialPage.props.flash.message)
     main.component('layout', Layout)
     main.component('GridTable', GridTable)
+    main.component('Head', Head)
     main.provide('base_url', props.initialPage.props.url)
     main.mount(el)
   },
