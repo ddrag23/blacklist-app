@@ -16,5 +16,6 @@ class BlackList extends Model
         'alamat',
         'jenis_kelamin',
         'keterangan',
+        'user_id',
     ];
 }

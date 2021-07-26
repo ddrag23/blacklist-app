@@ -16,7 +16,7 @@
               Kembali
             </Link>
           </div>
-          <form @submit.prevent="handleSubmit">
+          <form @submit.prevent="handleSubmit" enctype="multipart/form-data">
             <div class="card-body">
               <div class="row g-3">
                 <input type="hidden" v-model="form.id" />
@@ -25,8 +25,16 @@
                   ><input
                     type="file"
                     class="form-control"
+                    @input="form.foto = $event.target.files[0]"
                     :class="{ 'is-invalid': form.errors.foto }"
                   />
+                  <progress
+                    v-if="form.progress"
+                    :value="form.progress.percentage"
+                    max="100"
+                  >
+                    {{ form.progress.percentage }}%
+                  </progress>
                   <div v-if="form.errors.foto" class="invalid-feedback">
                     {{ form.errors.foto }}
                   </div>
@@ -36,6 +44,7 @@
                   ><input
                     type="file"
                     class="form-control"
+                    @input="form.foto_ktp = $event.target.files[0]"
                     :class="{ 'is-invalid': form.errors.foto_ktp }"
                   />
                   <div v-if="form.errors.foto_ktp" class="invalid-feedback">
@@ -127,10 +136,10 @@
   </layout>
 </template>
 <script>
-import Layout from "@/pages/Layout.vue";
-import { Head, useForm, usePage, Link } from "@inertiajs/inertia-vue3";
+import { Head, useForm, Link } from "@inertiajs/inertia-vue3";
 import { Inertia } from "@inertiajs/inertia";
 import Swal from "sweetalert2";
+import { inject } from "vue";
 
 export default {
   props: {
@@ -138,14 +147,14 @@ export default {
     row: Object,
   },
   components: {
-    Layout,
     Head,
     Link,
   },
   setup: (props) => {
-    const page = usePage();
-
+    const baseUrl = inject("base_url");
     const form = useForm({
+      foto: "",
+      foto_ktp: "",
       id: props.row !== undefined ? props.row.id : "",
       nama: props.row !== undefined ? props.row.nama : "",
       alamat: props.row !== undefined ? props.row.alamat : "",
@@ -154,12 +163,13 @@ export default {
       keterangan: props.row !== undefined ? props.row.keterangan : "",
     });
     const handleSubmit = () => {
-      console.log(page.props.value.url);
-      form.post(`${page.props.value.url}/blacklist/store`, {
-        onSuccess: () => {
+      form.post(`${baseUrl}/blacklist/store`, {
+        onSuccess: (page) => {
+          form.clearErrors();
+          form.reset();
           Swal.fire({
             title: "Berhasil!!",
-            text: page.props.value.flash.message,
+            text: page.props.flash.message,
             icon: "success",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -173,16 +183,11 @@ export default {
               /* Read more about handling dismissals below */
               result.dismiss === Swal.DismissReason.cancel
             ) {
-              Inertia.visit(
-                `${page.props.value.url}/blacklist/edit/${props.row.id}`,
-                {
-                  method: "get",
-                }
-              );
+              Inertia.visit(`${baseUrl}/blacklist/edit/${props.row.id}`, {
+                method: "get",
+              });
             }
           });
-          form.clearErrors();
-          form.reset();
         },
       });
     };

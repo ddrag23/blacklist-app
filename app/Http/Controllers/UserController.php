@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 
 class UserController extends Controller
@@ -14,7 +16,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        return Inertia::render('user/Index');
+        return Inertia::render('user/Index', [
+            'users' => User::latest('id')->get(),
+        ]);
     }
 
     /**
@@ -24,7 +28,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('user/Form', [
+            'title' => 'Tambah data',
+        ]);
     }
 
     /**
@@ -35,7 +41,27 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'name' => 'required',
+            'username' => 'required|min:3',
+            'email' => 'required|email',
+            'notelp' => 'required',
+            'role' => 'required',
+            'jenis_kelamin' => 'required',
+            'is_active' => 'required',
+            'alamat' => 'required',
+        ];
+        if ($request->has('password') && !empty($request->password)) {
+            $rules['password'] = 'confirmed|min:3';
+        }
+        $request->validate($rules);
+        $user = new User();
+        $body = $request->all();
+        $body['password'] = !empty($request->password)
+            ? Hash::make($request->passowrd)
+            : $user->find($request->id)->password;
+        $user->updateOrCreate(['id' => $body['id']], $body);
+        return back()->with('message', 'Data berhasil disimpan');
     }
 
     /**
@@ -44,9 +70,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        return Inertia::render('user/Detail', [
+            'row' => $user,
+        ]);
     }
 
     /**
@@ -55,21 +83,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        return Inertia::render('user/Form', [
+            'row' => $user,
+            'title' => 'Edit data',
+        ]);
     }
 
     /**
@@ -78,8 +97,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return back()->with('message', 'Data berhasil dihapus');
     }
 }

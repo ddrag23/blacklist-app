@@ -23,17 +23,13 @@
   </layout>
 </template>
 <script>
-import Layout from "@/pages/Layout.vue";
-import { ref, onMounted, computed } from "vue";
-import { Link, usePage, Head } from "@inertiajs/inertia-vue3";
+import { ref, onMounted, computed, inject } from "vue";
+import { addButton, onNotifWarning, onNotif } from "@/utils/helper.js";
+import { Link, Head } from "@inertiajs/inertia-vue3";
 import { Inertia } from "@inertiajs/inertia";
-import Swal from "sweetalert2";
 import { h, html } from "gridjs";
-import GridTable from "@/components/GridTable.vue";
 export default {
   components: {
-    Layout,
-    GridTable,
     Head,
     Link,
   },
@@ -41,8 +37,8 @@ export default {
     blacklist: Array,
   },
   setup: (props) => {
-    const page = usePage();
     const table = ref();
+    const baseUrl = inject("base_url");
     const columns = [
       { name: "id", hidden: true },
       "#",
@@ -52,28 +48,20 @@ export default {
       {
         name: "Aksi",
         formatter: (_, row) => {
-          const addBtn = (el, btnClass, childEl, fn) => {
-            return {
-              el: el,
-              class: btnClass,
-              child: childEl,
-              event: (param) => fn(param),
-            };
-          };
           const elements = [
-            addBtn(
+            addButton(
               "button",
               "btn btn-primary me-1",
               html('<i class="bi bi-pencil-square"></i>'),
               handleEdit
             ),
-            // addBtn(
-            //   "button",
-            //   "btn btn-warning me-1",
-            //   html('<i class="bi bi-eye"></i>'),
-            //   handleDetail
-            // ),
-            addBtn(
+            addButton(
+              "button",
+              "btn btn-warning me-1",
+              html('<i class="bi bi-eye"></i>'),
+              handleDetail
+            ),
+            addButton(
               "button",
               "btn btn-danger me-1",
               html('<i class="bi bi-trash"></i>'),
@@ -103,29 +91,24 @@ export default {
         null,
       ])
     );
-    const handleEdit = (id) =>
-      Inertia.visit(`${page.props.value.url}/blacklist/edit/${id}`, {
+    const handleDetail = (id) =>
+      Inertia.visit(`${baseUrl}/blacklist/detail/${id}`, {
         method: "get",
       });
+    const handleEdit = (id) =>
+      Inertia.visit(`${baseUrl}/blacklist/edit/${id}`, {
+        method: "get",
+      });
+
     const handleDelete = (id) => {
-      Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Inertia.delete(`${page.props.value.url}/blacklist/delete/${id}`, {
-            onSuccess: (page) => {
-              Swal.fire("Saved!", page.props.flash.message, "success");
-              document.getElementById("wrapper").innerHTML = "";
-              table.value.loadTable();
-            },
-          });
-        }
+      onNotifWarning(() => {
+        Inertia.delete(`${baseUrl}/blacklist/delete/${id}`, {
+          onSuccess: (page) => {
+            onNotif("Saved!", "success", page.props.flash.message);
+            document.getElementById("wrapper").innerHTML = "";
+            table.value.loadTable();
+          },
+        });
       });
     };
     onMounted(() => table.value.loadTable());

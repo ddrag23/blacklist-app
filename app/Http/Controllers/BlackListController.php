@@ -28,7 +28,7 @@ class BlackListController extends Controller
      */
     public function create()
     {
-        return Inertia::render('blacklist/Create', [
+        return Inertia::render('blacklist/Form', [
             'title' => 'Tambah data',
         ]);
     }
@@ -41,18 +41,46 @@ class BlackListController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'foto' => 'mimes:jpg,jpeg,png',
-            'foto_ktp' => 'mimes:jpg,jpeg,png',
+        $validate = [
             'nama' => 'required',
             'nohp' => 'required',
             'jenis_kelamin' => 'required',
             'alamat' => 'required',
             'keterangan' => 'required',
-        ]);
+        ];
+        if (!empty($request->foto)) {
+            $validate['foto'] = 'mimes:jpg,jpeg,png';
+        }
+        if (!empty($request->foto_ktp)) {
+            $validate['foto_ktp'] = 'mimes:jpg,jpeg,png';
+        }
+        $request->validate($validate);
         $body = $request->all();
         $body['user_id'] = auth()->user()->id;
-        BlackList::updateOrCreate(['id' => $body['id']], $body);
+        $blacklist = new BlackList();
+        $find = $blacklist->find($body['id']);
+        if (!is_null($request->file('foto')) && !is_null($find)) {
+            Storage::delete($find->foto);
+        }
+        if (!is_null($request->file('foto_ktp')) && !is_null($find)) {
+            Storage::delete($find->foto_ktp);
+        }
+        if (!is_null($body['id'])) {
+            $body['foto'] = !empty($request->foto)
+                ? $request->file('foto')->store('image/foto-blacklist')
+                : $find->foto;
+            $body['foto_ktp'] = !empty($request->foto_ktp)
+                ? $request->file('foto_ktp')->store('image/foto-ktp')
+                : $find->foto_ktp;
+        } else {
+            $body['foto'] = !empty($request->foto)
+                ? $request->file('foto')->store('image/foto-blacklist')
+                : '';
+            $body['foto_ktp'] = !empty($request->foto_ktp)
+                ? $request->file('foto_ktp')->store('image/foto-ktp')
+                : '';
+        }
+        $blacklist->updateOrCreate(['id' => $body['id']], $body);
         return back()->with('message', 'Data berhasil disimpan');
     }
 
@@ -64,7 +92,9 @@ class BlackListController extends Controller
      */
     public function show(BlackList $blackList)
     {
-        //
+        return Inertia::render('blacklist/Detail', [
+            'row' => $blackList,
+        ]);
     }
 
     /**
@@ -75,7 +105,7 @@ class BlackListController extends Controller
      */
     public function edit(BlackList $blackList)
     {
-        return Inertia::render('blacklist/Create', [
+        return Inertia::render('blacklist/Form', [
             'row' => $blackList,
             'title' => 'Edit data',
         ]);

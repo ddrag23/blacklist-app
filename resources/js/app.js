@@ -1,5 +1,7 @@
-import { createApp, h } from 'vue'
+import { createApp, h, computed } from 'vue'
 import { createInertiaApp } from '@inertiajs/inertia-vue3'
+import Layout from '@/pages/Layout.vue'
+import GridTable from '@/components/GridTable.vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap'
 import 'gridjs/dist/theme/mermaid.css'
@@ -10,8 +12,13 @@ createInertiaApp({
   title: (title) => `${title} - Blacklist-App`,
   resolve: (name) => require(`./pages/${name}`),
   setup({ el, app, props, plugin }) {
-    createApp({ render: () => h(app, props) })
-      .use(plugin)
-      .mount(el)
+    const main = createApp({
+      render: () => h(app, props),
+    }).use(plugin)
+    const flashMessage = computed(() => props.initialPage.props.flash.message)
+    main.component('layout', Layout)
+    main.component('GridTable', GridTable)
+    main.provide('base_url', props.initialPage.props.url)
+    main.mount(el)
   },
 })

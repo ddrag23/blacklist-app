@@ -31,6 +31,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', [BlackListController::class, 'index']);
         Route::get('/create', [BlackListController::class, 'create']);
         Route::get('/edit/{blackList}', [BlackListController::class, 'edit']);
+        Route::get('/detail/{blackList}', [BlackListController::class, 'show']);
         Route::post('/store', [BlackListController::class, 'store']);
 
         Route::delete('/delete/{blackList}', [
@@ -38,5 +39,12 @@ Route::middleware(['auth'])->group(function () {
             'destroy',
         ]);
     });
-    Route::get('/user', [UserController::class, 'index']);
+    Route::prefix('user')->group(function () {
+        Route::get('/', [UserController::class, 'index']);
+        Route::get('/create', [UserController::class, 'create']);
+        Route::get('/edit/{user}', [UserController::class, 'edit']);
+        Route::get('/detail/{user}', [UserController::class, 'show']);
+        Route::post('/store', [UserController::class, 'store']);
+        Route::delete('/delete/{user}', [UserController::class, 'destroy']);
+    });
 });
