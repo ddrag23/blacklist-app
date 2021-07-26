@@ -41,7 +41,7 @@
           aria-labelledby="dropdownMenuLink"
         >
           <li>
-            <Link class="dropdown-item" href="profile">
+            <Link class="dropdown-item" :href="`${$page.props.url}/profile`">
               <i class="bi bi-person-circle"></i> Profile</Link
             >
           </li>

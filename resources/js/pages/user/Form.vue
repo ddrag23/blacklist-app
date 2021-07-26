@@ -212,7 +212,10 @@ export default {
     });
     const handleSubmit = () => {
       form.post(`${baseUrl}/user/store`, {
+        preserveScroll: true,
         onSuccess: (page) => {
+          Inertia.get(`${baseUrl}/user/edit/${props.row.id}`);
+
           form.clearErrors();
           form.reset();
           Swal.fire({
@@ -231,9 +234,6 @@ export default {
               /* Read more about handling dismissals below */
               result.dismiss === Swal.DismissReason.cancel
             ) {
-              Inertia.visit(`${baseUrl}/user/edit/${props.row.id}`, {
-                method: "get",
-              });
             }
           });
         },

@@ -164,9 +164,12 @@ export default {
     });
     const handleSubmit = () => {
       form.post(`${baseUrl}/blacklist/store`, {
+        preserveScroll: true,
         onSuccess: (page) => {
           form.clearErrors();
           form.reset();
+          Inertia.get(`${baseUrl}/blacklist/edit/${props.row.id}`);
+
           Swal.fire({
             title: "Berhasil!!",
             text: page.props.flash.message,
@@ -179,13 +182,6 @@ export default {
           }).then((result) => {
             if (result.isConfirmed) {
               document.getElementById("back").click();
-            } else if (
-              /* Read more about handling dismissals below */
-              result.dismiss === Swal.DismissReason.cancel
-            ) {
-              Inertia.visit(`${baseUrl}/blacklist/edit/${props.row.id}`, {
-                method: "get",
-              });
             }
           });
         },

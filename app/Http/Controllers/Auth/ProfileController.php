@@ -38,8 +38,11 @@ class ProfileController extends Controller
             Storage::delete($find->foto);
             $body['foto'] = $request->file('foto')->store('image/profile');
         } else {
-            $body['foto'] = $request->file('foto')->store('image/profile');
+            $body['foto'] = !empty($request->foto)
+                ? $request->file('foto')->store('image/profile')
+                : '';
         }
         $user->where('id', auth()->user()->id)->update($body);
+        return back()->with('message', 'Data profile berhasil disimpan');
     }
 }
