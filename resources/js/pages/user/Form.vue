@@ -4,8 +4,15 @@
     <h3><b>Buat Pengguna</b></h3>
     <div class="row">
       <div class="col-12">
-        <div class="card">
-          <div class="card-header d-flex justify-content-between">
+        <div class="card shadow-sm">
+          <div
+            class="
+              card-header
+              d-flex
+              justify-content-between
+              card-outline-primary
+            "
+          >
             <h5>Form Pengguna</h5>
             <Link
               class="btn btn-success"
@@ -213,8 +220,13 @@ export default {
     const handleSubmit = () => {
       form.post(`${baseUrl}/user/store`, {
         preserveScroll: true,
+        onError: () => {
+          onNotif("!Gagal", "error", "Masukkan data dengan benar");
+        },
         onSuccess: (page) => {
-          Inertia.get(`${baseUrl}/user/edit/${props.row.id}`);
+          if (props.row !== undefined) {
+            Inertia.get(`${baseUrl}/user/edit/${props.row.id}`);
+          }
 
           form.clearErrors();
           form.reset();

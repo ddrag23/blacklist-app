@@ -4,6 +4,7 @@
   --topNavHeight: 56px;
   --my-primary: #0016bd;
   --sub-color-primary: #0720e3;
+  --bg-guest-img: url('/blacklist-app/assets/images/bg-guest-1.jpg');
 }
 .offcanvas-start {
   width: var(--offcanva-width) !important;
@@ -25,6 +26,9 @@
   background-color: blue;
   border-radius: 10px;
   box-shadow: 0 0 3px #1a279c;
+}
+.img__circle {
+  border-radius: 50%;
 }
 .profile__setting {
   text-decoration: unset;
@@ -56,4 +60,3 @@
     margin-left: var(--offcanva-width);
   }
 }
-

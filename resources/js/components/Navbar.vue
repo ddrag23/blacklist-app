@@ -28,8 +28,8 @@
           aria-expanded="false"
         >
           <img
-            :src="`${$page.props.static}assets/images/person1.png`"
-            class="mx-2"
+            :src="avatar"
+            class="mx-2 img__circle img-fluid"
             width="40"
             height="40"
             alt=""
@@ -46,13 +46,16 @@
             >
           </li>
           <li>
-            <a class="dropdown-item" href="#">
-              <i class="bi bi-shield-lock-fill"></i>
-              Change Password</a
+            <Link
+              class="dropdown-item"
+              :href="`${$page.props.url}/profile/change-password`"
             >
+              <i class="bi bi-shield-lock-fill"></i>
+              Change Password
+            </Link>
           </li>
           <li>
-            <Link class="dropdown-item" href="logout">
+            <Link class="dropdown-item" :href="`${$page.props.url}/logout`">
               <i class="bi bi-box-arrow-in-left"></i>
               Logout
             </Link>
@@ -65,11 +68,21 @@
 </template>
 <script>
 import Sidebar from "@/components/Sidebar.vue";
-import { Link } from "@inertiajs/inertia-vue3";
+import { Link, usePage } from "@inertiajs/inertia-vue3";
 export default {
   components: {
     Sidebar,
     Link,
+  },
+  setup: () => {
+    const page = usePage();
+    const fotoUser = page.props.value.user.foto;
+    const avatar = fotoUser
+      ? `${page.props.value.static}public/storage/${fotoUser}`
+      : `${page.props.value.static}assets/images/person1.png`;
+    return {
+      avatar,
+    };
   },
 };
 </script>

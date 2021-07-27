@@ -26,7 +26,7 @@
               Blacklist
             </Link>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" v-if="$page.props.user.role === 'admin'">
             <Link
               :href="`${$page.props.url}/user`"
               class="nav-link px-2 l text-white"

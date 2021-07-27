@@ -17,7 +17,12 @@ class BlackListController extends Controller
     public function index()
     {
         return Inertia::render('blacklist/Index', [
-            'blacklist' => BlackList::latest('id')->get(),
+            'blacklist' =>
+                auth()->user()->role === 'admin'
+                    ? BlackList::latest('id')->get()
+                    : BlackList::where('user_id', auth()->user()->id)
+                        ->latest('id')
+                        ->get(),
         ]);
     }
 

@@ -4,8 +4,8 @@
     <h3><b>Daftar Pengguna</b></h3>
     <div class="row">
       <div class="col-12">
-        <div class="card">
-          <div class="card-header">
+        <div class="card shadow-sm">
+          <div class="card-header card-outline-primary">
             <div class="d-flex justify-content-between">
               <h5>Data Pengguna</h5>
               <Link class="btn btn-primary" href="user/create">

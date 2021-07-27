@@ -57,7 +57,7 @@
 <style>
 .wrap {
   min-height: 100vh;
-  background-color: grey;
+  background-color: #e1e3e6;
 }
 </style>
 <script>

@@ -4,8 +4,15 @@
     <h3><b>Buat Blacklist</b></h3>
     <div class="row">
       <div class="col-12">
-        <div class="card">
-          <div class="card-header d-flex justify-content-between">
+        <div class="card shadow-sm">
+          <div
+            class="
+              card-header
+              d-flex
+              justify-content-between
+              card-outline-primary
+            "
+          >
             <h5>Form Blacklist</h5>
             <Link
               class="btn btn-success"
@@ -47,6 +54,13 @@
                     @input="form.foto_ktp = $event.target.files[0]"
                     :class="{ 'is-invalid': form.errors.foto_ktp }"
                   />
+                  <progress
+                    v-if="form.progress"
+                    :value="form.progress.percentage"
+                    max="100"
+                  >
+                    {{ form.progress.percentage }}%
+                  </progress>
                   <div v-if="form.errors.foto_ktp" class="invalid-feedback">
                     {{ form.errors.foto_ktp }}
                   </div>
@@ -165,10 +179,15 @@ export default {
     const handleSubmit = () => {
       form.post(`${baseUrl}/blacklist/store`, {
         preserveScroll: true,
+        onError: () => {
+          onNotif("!Gagal", "error", "Masukkan data dengan benar");
+        },
         onSuccess: (page) => {
           form.clearErrors();
           form.reset();
-          Inertia.get(`${baseUrl}/blacklist/edit/${props.row.id}`);
+          if (props.row !== undefined) {
+            Inertia.get(`${baseUrl}/blacklist/edit/${props.row.id}`);
+          }
 
           Swal.fire({
             title: "Berhasil!!",

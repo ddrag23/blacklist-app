@@ -1,9 +1,9 @@
 <template>
-  <layout>
+  <layout title="Detail blacklist">
     <div class="row justify-content-center">
       <div class="col-12 col-md-8">
-        <div class="card">
-          <div class="card-header">
+        <div class="card shadow-sm">
+          <div class="card-header card-outline-primary">
             <div class="d-flex justify-content-between">
               <h5>Detail Data Blacklist</h5>
               <Link

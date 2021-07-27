@@ -4,8 +4,16 @@
     <h3><b>Profile</b></h3>
     <div class="row g-3">
       <div class="col-12 col-md-4">
-        <div class="card">
-          <div class="card-body">
+        <div class="card shadow-sm">
+          <div class="card-body card-outline-primary">
+            <div class="d-flex justify-content-center">
+              <img
+                :src="avatar"
+                class="img-fluid img__circle"
+                alt=""
+                style="width: 80px"
+              />
+            </div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
                 <b>Nama</b>
@@ -46,8 +54,8 @@
         </div>
       </div>
       <div class="col-12 col-md-8">
-        <div class="card">
-          <div class="card-header">
+        <div class="card shadow-sm">
+          <div class="card-header card-outline-primary">
             <h5>Form Profile</h5>
           </div>
           <form @submit.prevent="handleSubmit" enctype="multipart/form-data">
@@ -187,6 +195,9 @@ export default {
   },
   setup: (props) => {
     const baseUrl = inject("base_url");
+    const avatar = props.user.foto
+      ? `${baseUrl}/public/storage/${props.user.foto}`
+      : `${baseUrl}/assets/images/person1.png`;
     const form = useForm({
       foto: props.user.foto,
       name: props.user.name,
@@ -218,6 +229,7 @@ export default {
       handleEditProfile,
       edited,
       form,
+      avatar,
     };
   },
 };

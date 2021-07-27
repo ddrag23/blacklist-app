@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -44,5 +45,33 @@ class ProfileController extends Controller
         }
         $user->where('id', auth()->user()->id)->update($body);
         return back()->with('message', 'Data profile berhasil disimpan');
+    }
+    public function changePassword()
+    {
+        return Inertia::render('auth/ChangePassword');
+    }
+
+    public function storeChangePassword(Request $request)
+    {
+        $userSession = auth()->user();
+        $request->validate([
+            'old_password' => [
+                'required',
+                function ($attribute, $value, $fail) use ($userSession) {
+                    if (!Hash::check($value, $userSession->password)) {
+                        $fail('Password Lama Tidak Cocok');
+                    }
+                },
+            ],
+            'new_password' => 'required|same:password_confirmation',
+            'password_confirmation' => 'required',
+        ]);
+        User::where('id', $userSession->id)->update([
+            'password' => Hash::make($request->new_password),
+        ]);
+        return response()->json([
+            'success' => $request->all(),
+            'message' => 'Data berhasil dimasukkan',
+        ]);
     }
 }
