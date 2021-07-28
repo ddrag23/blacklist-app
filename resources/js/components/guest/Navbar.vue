@@ -1,7 +1,9 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark gradient fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#">Blacklist App</a>
+      <Link class="navbar-brand" :href="`${$page.props.url}`"
+        >Blacklist App</Link
+      >
       <button
         class="navbar-toggler"
         type="button"
@@ -15,11 +17,11 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ms-auto">
-          <a
+          <Link
             class="nav-link text-white text-uppercase"
             aria-current="page"
-            href="#"
-            ><b>Search</b></a
+            :href="`${$page.props.url}/search-people`"
+            ><b>Search</b></Link
           >
           <Link
             class="btn btn-primary text-white btn-round"

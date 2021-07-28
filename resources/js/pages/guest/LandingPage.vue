@@ -16,10 +16,13 @@
             aperiam nobis.
           </p>
           <div class="d-flex">
-            <button class="btn btn-success btn-round me-2">
+            <Link
+              class="btn btn-success btn-round me-2"
+              :href="`${$page.props.url}/search-people`"
+            >
               <i class="bi bi-search"></i>
               Search
-            </button>
+            </Link>
             <Link
               class="btn btn-primary text-white btn-round"
               :href="`${$page.props.url}/register`"
