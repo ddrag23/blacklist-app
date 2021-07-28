@@ -192,6 +192,7 @@ import { Head, useForm, Link } from "@inertiajs/inertia-vue3";
 import { Inertia } from "@inertiajs/inertia";
 import Swal from "sweetalert2";
 import { inject } from "vue";
+import { onNotif } from "@/utils/helper";
 
 export default {
   props: {

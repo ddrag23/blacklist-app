@@ -15,6 +15,20 @@
             molestias incidunt inventore eaque veniam quisquam dolore illo quod
             aperiam nobis.
           </p>
+          <div class="d-flex">
+            <button class="btn btn-success btn-round me-2">
+              <i class="bi bi-search"></i>
+              Search
+            </button>
+            <Link
+              class="btn btn-primary text-white btn-round"
+              :href="`${$page.props.url}/register`"
+            >
+              <i class="bi bi-box-arrow-right"></i>
+
+              Register</Link
+            >
+          </div>
         </div>
         <div class="col-md-6 p-3">
           <img
@@ -37,27 +51,24 @@
   </div>
 </template>
 <style >
-.gradient {
-  background: rgb(2, 0, 36);
-  background: linear-gradient(
-    90deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(0, 37, 255, 1) 0%,
-    rgba(58, 31, 176, 1) 100%
-  );
-}
 .mt-custom {
   margin-top: 3rem;
 }
+.btn-round {
+  border-radius: 20px;
+}
+
 /* .main__content {
   height: 100%;
 } */
 </style>
 <script>
 import Navbar from "@/components/guest/Navbar.vue";
+import { Link } from "@inertiajs/inertia-vue3";
 export default {
   components: {
     Navbar,
+    Link,
   },
 };
 </script>

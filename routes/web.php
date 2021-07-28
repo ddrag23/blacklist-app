@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\ProfileController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BlackListController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\UserController;
@@ -25,6 +26,13 @@ Route::post('/login/authentication', [
     LoginController::class,
     'authentication',
 ]);
+Route::get('/test', function () {
+    return view('mail');
+});
+Route::prefix('register')->group(function () {
+    Route::get('/', [RegisterController::class, 'index']);
+    Route::post('/store', [RegisterController::class, 'store']);
+});
 Route::middleware(['auth'])->group(function () {
     Route::get('/logout', LogoutController::class);
     Route::prefix('blacklist')->group(function () {

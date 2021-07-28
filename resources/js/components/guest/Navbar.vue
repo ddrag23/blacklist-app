@@ -19,11 +19,40 @@
             class="nav-link text-white text-uppercase"
             aria-current="page"
             href="#"
-            >Search</a
+            ><b>Search</b></a
           >
-          <a class="btn btn-primary text-white" href="#">Register</a>
+          <Link
+            class="btn btn-primary text-white btn-round"
+            :href="`${$page.props.url}/register`"
+          >
+            <i class="bi bi-box-arrow-right"></i>
+
+            Register</Link
+          >
         </div>
       </div>
     </div>
   </nav>
 </template>
+<style>
+.btn-round {
+  border-radius: 20px;
+}
+.gradient {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(0, 37, 255, 1) 0%,
+    rgba(58, 31, 176, 1) 100%
+  );
+}
+</style>
+<script>
+import { Link } from "@inertiajs/inertia-vue3";
+export default {
+  components: {
+    Link,
+  },
+};
+</script>
