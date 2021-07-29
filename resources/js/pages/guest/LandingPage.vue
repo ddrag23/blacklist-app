@@ -8,12 +8,11 @@
     <div class="container mt-custom">
       <div class="row justify-content-center align-items-center">
         <div class="col-md-6">
-          <h2 class="text-white">Blacklist App</h2>
+          <h2 class="text-white"><b>Blacklist App</b></h2>
           <p class="text-white">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugit sit
-            ipsa provident quis, nesciunt vel natus dolorum eos aliquid,
-            molestias incidunt inventore eaque veniam quisquam dolore illo quod
-            aperiam nobis.
+            Merupakan aplikasi pencatatan dan pencarian orang-orang yang
+            bermasalah seperti membuat kecurangan yang merugikan suatu
+            perusahaan atau toko-toko tertentu
           </p>
           <div class="d-flex">
             <Link
@@ -21,7 +20,7 @@
               :href="`${$page.props.url}/search-people`"
             >
               <i class="bi bi-search"></i>
-              Search
+              Cari
             </Link>
             <Link
               class="btn btn-primary text-white btn-round"
@@ -29,7 +28,7 @@
             >
               <i class="bi bi-box-arrow-right"></i>
 
-              Register</Link
+              Daftar</Link
             >
           </div>
         </div>

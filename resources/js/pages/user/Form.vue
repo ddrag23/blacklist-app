@@ -178,7 +178,13 @@
             </div>
             <div class="card-footer">
               <div class="d-flex justify-content-end">
-                <button class="btn btn-primary" type="submit">Simpan</button>
+                <button
+                  class="btn btn-primary"
+                  type="submit"
+                  :disabled="form.processing"
+                >
+                  Simpan
+                </button>
               </div>
             </div>
           </form>
@@ -236,17 +242,13 @@ export default {
             text: page.props.flash.message,
             icon: "success",
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
+            confirmButtonColor: "#198754",
+            cancelButtonColor: "#0D6EFD",
             confirmButtonText: "Kembali",
             cancelButtonText: "Lanjutkan input data",
           }).then((result) => {
             if (result.isConfirmed) {
               document.getElementById("back").click();
-            } else if (
-              /* Read more about handling dismissals below */
-              result.dismiss === Swal.DismissReason.cancel
-            ) {
             }
           });
         },

@@ -140,7 +140,13 @@
             </div>
             <div class="card-footer">
               <div class="d-flex justify-content-end">
-                <button class="btn btn-primary" type="submit">Simpan</button>
+                <button
+                  class="btn btn-primary"
+                  type="submit"
+                  :disabled="form.processing"
+                >
+                  Simpan
+                </button>
               </div>
             </div>
           </form>
@@ -154,6 +160,7 @@ import { Head, useForm, Link } from "@inertiajs/inertia-vue3";
 import { Inertia } from "@inertiajs/inertia";
 import Swal from "sweetalert2";
 import { inject } from "vue";
+import { onNotif } from "@/utils/helper";
 
 export default {
   props: {
@@ -179,6 +186,7 @@ export default {
     const handleSubmit = () => {
       form.post(`${baseUrl}/blacklist/store`, {
         preserveScroll: true,
+
         onError: () => {
           onNotif("!Gagal", "error", "Masukkan data dengan benar");
         },
@@ -194,8 +202,8 @@ export default {
             text: page.props.flash.message,
             icon: "success",
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
+            confirmButtonColor: "#198754",
+            cancelButtonColor: "#0D6EFD",
             confirmButtonText: "Kembali",
             cancelButtonText: "Lanjutkan input data",
           }).then((result) => {

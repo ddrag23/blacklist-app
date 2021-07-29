@@ -1,8 +1,8 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark gradient fixed-top">
     <div class="container">
-      <Link class="navbar-brand" :href="`${$page.props.url}`"
-        >Blacklist App</Link
+      <Link class="navbar-brand text-uppercase" :href="`${$page.props.url}`"
+        ><b>Blacklist App</b></Link
       >
       <button
         class="navbar-toggler"
@@ -21,7 +21,8 @@
             class="nav-link text-white text-uppercase"
             aria-current="page"
             :href="`${$page.props.url}/search-people`"
-            ><b>Search</b></Link
+            style="font-size: 15px"
+            ><b>Portal Pencarian</b></Link
           >
           <Link
             class="btn btn-primary text-white btn-round"
@@ -29,7 +30,7 @@
           >
             <i class="bi bi-box-arrow-right"></i>
 
-            Register</Link
+            Daftar</Link
           >
         </div>
       </div>

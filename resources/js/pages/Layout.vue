@@ -7,7 +7,12 @@
     </div>
   </main>
   <footer>
-    <h5>Blacklist-app</h5>
+    <strong
+      >@2020 - 2021 Blacklist-app
+      <a href="http://skystudioscape.com/" class="text-muted"
+        >SkyStudioScape.com</a
+      >.</strong
+    >
   </footer>
 </template>
 <style scoped>

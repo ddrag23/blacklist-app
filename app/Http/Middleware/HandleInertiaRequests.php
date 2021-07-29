@@ -41,8 +41,10 @@ class HandleInertiaRequests extends Middleware
                 'message' => fn() => $request->session()->get('message'),
             ],
             'user' => fn() => $request->user(),
-            'static' => asset(''),
-            'url' => url('')
+            'static' =>
+                env('APP_MODE') === 'production' ? env('APP_URL') : asset(''),
+            'url' =>
+                env('APP_MODE') === 'production' ? env('APP_URL') : url(''),
         ]);
     }
 }

@@ -25,7 +25,7 @@ class PublicController extends Controller
                 'nama',
                 'like',
                 '%' . $request->search . '%'
-            )->paginate(6)
+            )->get()
         );
     }
 }

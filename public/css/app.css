@@ -36,6 +36,9 @@
   color: white;
   text-transform: capitalize;
 }
+.img__circle {
+  border-radius: 50%;
+}
 .active {
   background-color: #192ebf;
   border-radius: 10px;
