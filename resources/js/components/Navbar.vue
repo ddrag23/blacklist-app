@@ -17,7 +17,15 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand me-auto">Blacklist App</a>
+      <Link class="navbar-brand me-auto" :href="`${$page.props.url}/blacklist`">
+        <img
+          :src="`${$page.props.static}/assets/images/logo.png`"
+          class="img-fluid brand__desktop"
+          alt="logo"
+          width="50"
+          height="50"
+        />
+      </Link>
       <div class="dropwdown">
         <a
           href="#"

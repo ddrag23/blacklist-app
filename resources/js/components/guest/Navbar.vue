@@ -1,9 +1,15 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark gradient fixed-top">
     <div class="container">
-      <Link class="navbar-brand text-uppercase" :href="`${$page.props.url}`"
-        ><b>Blacklist App</b></Link
-      >
+      <Link class="navbar-brand text-uppercase" :href="`${$page.props.url}`">
+        <img
+          :src="`${$page.props.static}/assets/images/logo.png`"
+          class="img-fluid"
+          alt="logo"
+          width="50"
+          height="50"
+        />
+      </Link>
       <button
         class="navbar-toggler"
         type="button"

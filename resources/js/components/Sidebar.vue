@@ -14,6 +14,17 @@
       style="display: none"
     ></button>
     <div class="offcanvas-body">
+      <div class="brand__mobile">
+        <Link class="" :href="`${$page.props.url}/blacklist`">
+          <img
+            :src="`${$page.props.static}/assets/images/logo.png`"
+            class="img-fluid"
+            alt="logo"
+            width="50"
+            height="50"
+          />
+        </Link>
+      </div>
       <nav class="navbar-dark">
         <ul class="navbar-nav">
           <li class="nav-item">

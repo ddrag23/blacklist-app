@@ -20,6 +20,7 @@ createInertiaApp({
     main.component('GridTable', GridTable)
     main.component('Head', Head)
     main.provide('base_url', props.initialPage.props.url)
+    // console.log(props.initialPage.props.url)
     main.mount(el)
   },
 })

@@ -8,13 +8,15 @@
     <div class="container mt-custom">
       <div class="row justify-content-center align-items-center">
         <div class="col-md-6">
-          <h2 class="text-white"><b>Blacklist App</b></h2>
-          <p class="text-white">
+          <h2 class="text-white text-center text-md-start">
+            <b>Blacklist App</b>
+          </h2>
+          <p class="text-white text-center text-md-start">
             Merupakan aplikasi pencatatan dan pencarian orang-orang yang
             bermasalah seperti membuat kecurangan yang merugikan suatu
             perusahaan atau toko-toko tertentu
           </p>
-          <div class="d-flex">
+          <div class="d-flex justify-content-center justify-content-md-start">
             <Link
               class="btn btn-success btn-round me-2"
               :href="`${$page.props.url}/search-people`"
@@ -54,15 +56,16 @@
 </template>
 <style >
 .mt-custom {
-  margin-top: 3rem;
+  margin-top: 4.6rem;
 }
 .btn-round {
   border-radius: 20px;
 }
-
-/* .main__content {
-  height: 100%;
-} */
+@media (min-width: 768px) {
+  .mt-custom {
+    margin-top: 3rem;
+  }
+}
 </style>
 <script>
 import Navbar from "@/components/guest/Navbar.vue";

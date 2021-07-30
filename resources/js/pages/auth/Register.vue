@@ -13,13 +13,12 @@
                 <input
                   placeholder="Nama Lengkap"
                   class="form-control"
-                  id="nama"
                   type="text"
-                  :class="{ 'is-invalid': form.errors.nama }"
-                  v-model="form.nama"
+                  :class="{ 'is-invalid': form.errors.name }"
+                  v-model="form.name"
                 />
-                <div v-if="form.errors.nama" class="invalid-feedback">
-                  {{ form.errors.nama }}
+                <div v-if="form.errors.name" class="invalid-feedback">
+                  {{ form.errors.name }}
                 </div>
               </div>
               <div class="col-12">
@@ -62,6 +61,35 @@
                 </div>
               </div>
               <div class="col-12">
+                <input
+                  placeholder="Password"
+                  class="form-control"
+                  id="password"
+                  type="password"
+                  :class="{ 'is-invalid': form.errors.password }"
+                  v-model="form.password"
+                />
+                <div v-if="form.errors.password" class="invalid-feedback">
+                  {{ form.errors.password }}
+                </div>
+              </div>
+              <div class="col-12">
+                <input
+                  placeholder="Password Confirmation"
+                  class="form-control"
+                  id="password_confirmation"
+                  type="password"
+                  :class="{ 'is-invalid': form.errors.password_confirmation }"
+                  v-model="form.password_confirmation"
+                />
+                <div
+                  v-if="form.errors.password_confirmation"
+                  class="invalid-feedback"
+                >
+                  {{ form.errors.password_confirmation }}
+                </div>
+              </div>
+              <div class="col-12">
                 <textarea
                   placeholder="Alamat"
                   id="alamat"
@@ -76,10 +104,16 @@
                 </div>
               </div>
             </div>
-            <div class="d-grid mt-3">
+            <div class="d-grid flex-column mt-3">
               <button class="btn btn-primary btn-block" type="submit">
                 Daftar
               </button>
+              <div class="text-center">
+                Sudah punya akun ?
+                <span>
+                  <Link :href="`${$page.props.url}/login`">Login</Link>
+                </span>
+              </div>
             </div>
           </div>
         </form>
@@ -94,23 +128,27 @@
 }
 </style>
 <script>
-import { Head, useForm } from "@inertiajs/inertia-vue3";
-import { onNotif } from "@/utils/helper";
+import { Head, useForm, Link } from "@inertiajs/inertia-vue3";
 import { inject } from "@vue/runtime-core";
+import { Inertia } from "@inertiajs/inertia";
+import Swal from "sweetalert2";
 
 export default {
   components: {
     Head,
+    Link,
   },
 
   setup() {
     const baseUrl = inject("base_url");
     const form = useForm({
       username: "",
-      nama: "",
+      name: "",
       notelp: "",
       email: "",
       alamat: "",
+      password: "",
+      password_confirmation: "",
     });
     const handleSubmit = () => {
       form.post(`${baseUrl}/register/store`, {
@@ -118,8 +156,17 @@ export default {
         onSuccess: (page) => {
           form.reset();
           form.clearErrors();
-          console.log(page.props.flash.message);
-          onNotif("Berhasil!", "success", page.props.flash.message);
+          Swal.fire({
+            title: "Berhasil!!",
+            text: page.props.flash.message,
+            icon: "success",
+            confirmButtonColor: "#198754",
+            confirmButtonText: "Login",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Inertia.get(`${page.props.url}/login`);
+            }
+          });
         },
       });
     };

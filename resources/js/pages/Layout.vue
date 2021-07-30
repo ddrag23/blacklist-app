@@ -1,7 +1,7 @@
 <template>
   <Head :title="title" />
   <Navbar />
-  <main class="my-5 pt-3">
+  <main class="pt-3 mt-custom">
     <div class="container-fluid">
       <slot></slot>
     </div>
@@ -16,6 +16,9 @@
   </footer>
 </template>
 <style scoped>
+.mt-custom {
+  margin-top: 2.7rem;
+}
 main {
   background-color: #e1e3e6;
   min-height: 100vh;
@@ -31,6 +34,11 @@ footer {
   footer {
     left: var(--offcanva-width);
     padding: 0.8rem;
+  }
+}
+@media (min-width: 768px) {
+  .mt-custom {
+    margin-top: 4rem;
   }
 }
 </style>

@@ -7,6 +7,15 @@
           <div class="card-body">
             <div class="row g-3">
               <div class="col-12">
+                <div class="d-flex justify-content-center">
+                  <img
+                    :src="`${$page.props.static}/assets/images/logo.png`"
+                    alt="logo"
+                    class="img-fluid"
+                    width="80"
+                    height="80"
+                  />
+                </div>
                 <h4 class="text-center">Login</h4>
                 <div
                   class="alert alert-danger"
@@ -43,10 +52,16 @@
                 </div>
               </div>
             </div>
-            <div class="d-grid mt-3">
+            <div class="d-grid flex-column mt-3">
               <button class="btn btn-primary btn-block" type="submit">
                 Login
               </button>
+              <div class="text-center">
+                Belum punya akun ?
+                <span>
+                  <Link :href="`${$page.props.url}/register`">Buat akun!</Link>
+                </span>
+              </div>
             </div>
           </div>
         </form>
@@ -63,10 +78,11 @@
 <script>
 import { reactive } from "vue";
 import { Inertia } from "@inertiajs/inertia";
-import { Head } from "@inertiajs/inertia-vue3";
+import { Head, Link } from "@inertiajs/inertia-vue3";
 export default {
   components: {
     Head,
+    Link,
   },
   props: {
     errors: Object,
