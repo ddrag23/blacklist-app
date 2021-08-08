@@ -1,7 +1,7 @@
 @import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css');
 :root {
   --offcanva-width: 260px;
-  --topNavHeight: 56px;
+  --topNavHeight: 76px;
   --my-primary: #0016bd;
   --sub-color-primary: #0720e3;
 }

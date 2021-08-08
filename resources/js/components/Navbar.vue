@@ -74,6 +74,16 @@
   </nav>
   <Sidebar />
 </template>
+<style>
+.navbar-brand {
+  display: none;
+}
+@media (min-width: 768px) {
+  .navbar-brand {
+    display: block;
+  }
+}
+</style>
 <script>
 import Sidebar from "@/components/Sidebar.vue";
 import { Link, usePage } from "@inertiajs/inertia-vue3";

@@ -52,6 +52,17 @@
     </div>
   </div>
 </template>
+<style>
+.brand__mobile {
+  text-align: center;
+  margin: 1rem 0 1rem 0;
+}
+@media (min-width: 768px) {
+  .brand__mobile {
+    display: none;
+  }
+}
+</style>
 <script>
 import { Link } from "@inertiajs/inertia-vue3";
 import { onMounted, ref } from "vue";
